@@ -1,0 +1,10 @@
+# Ignora tutto...
+*
+
+# ...tranne i file del sito
+!index.html
+!*.jpg
+!*.jpeg
+!*.png
+!*.webp
+!.gitignore
