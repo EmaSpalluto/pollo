@@ -254,29 +254,14 @@
   }
   @media (max-width:760px){.pronto-gallery{grid-template-columns:1fr;} .pronto-item{height:200px;}}
 
-  /* Macelleria carousel */
-  .mac-carousel{position:relative; overflow:hidden; border-radius:14px; margin-top:0;}
-  .mac-track{display:flex; transition:transform .4s ease;}
-  .mac-slide{min-width:calc(33.333% - 10px); margin-right:14px; border-radius:12px; overflow:hidden; position:relative; cursor:pointer; flex-shrink:0;}
-  .mac-slide img{width:100%; height:200px; object-fit:cover; display:block; transition:transform .3s ease;}
-  .mac-slide:hover img{transform:scale(1.04);}
-  .mac-label{position:absolute; bottom:0; left:0; right:0; padding:8px 12px; background:linear-gradient(to top,rgba(28,21,15,0.9),transparent); color:var(--paper); font-family:'Oswald'; font-size:0.78rem; letter-spacing:0.02em;}
-  .mac-btn{position:absolute; top:50%; transform:translateY(-50%); background:rgba(28,21,15,0.7); color:var(--gold); border:none; border-radius:50%; width:40px; height:40px; font-size:1.6rem; cursor:pointer; z-index:2; display:flex; align-items:center; justify-content:center; line-height:1; transition:background .2s;}
-  .mac-btn:hover{background:var(--flame);}
-  .mac-btn--prev{left:8px;}
-  .mac-btn--next{right:8px;}
-  .mac-dots{display:flex; justify-content:center; gap:8px; margin-top:14px;}
-  .mac-dot{width:8px; height:8px; border-radius:50%; background:var(--char-3); cursor:pointer; transition:background .2s;}
-  .mac-dot.active{background:var(--flame);}
-  /* Lightbox */
-  .lb-overlay{display:none; position:fixed; inset:0; background:rgba(10,6,3,0.93); z-index:999; align-items:center; justify-content:center; flex-direction:column;}
-  .lb-overlay.open{display:flex;}
-  .lb-img{max-width:90vw; max-height:80vh; border-radius:8px; object-fit:contain;}
-  .lb-caption{color:var(--paper-2); font-family:'Oswald'; font-size:0.9rem; margin-top:14px; letter-spacing:0.04em;}
-  .lb-close{position:absolute; top:18px; right:22px; background:none; border:none; color:var(--paper); font-size:1.8rem; cursor:pointer; z-index:1000;}
-  .lb-prev, .lb-next{position:absolute; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--gold); font-size:3rem; cursor:pointer; padding:0 20px; z-index:1000;}
-  .lb-prev{left:0;} .lb-next{right:0;}
-  @media(max-width:760px){.mac-slide{min-width:calc(100% - 14px);}}
+  /* Macelleria grid */
+  .mac-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:0;}
+  .mac-fig{margin:0; border-radius:10px; overflow:hidden; position:relative;}
+  .mac-fig img{width:100%; height:180px; object-fit:cover; display:block; transition:transform .3s ease;}
+  .mac-fig:hover img{transform:scale(1.04);}
+  .mac-fig figcaption{position:absolute; bottom:0; left:0; right:0; padding:8px 10px; background:linear-gradient(to top,rgba(28,21,15,0.88),transparent); color:var(--paper); font-family:'Oswald'; font-size:0.74rem; letter-spacing:0.02em;}
+  @media(max-width:900px){.mac-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:480px){.mac-grid{grid-template-columns:1fr;}}
 
   /* Values */
   .value-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px; margin-top:46px;}
@@ -613,42 +598,23 @@
 <p class="eyebrow" style="color:var(--gold)">Carne fresca ogni giorno</p>
 <h2>Il banco della macelleria</h2>
 <p style="color:var(--paper-2); max-width:620px; margin-bottom:40px;">Accanto alla rosticceria trovate il nostro banco di macelleria: pollo intero e a pezzi, tagli di carne fresca, salsicce artigianali, involtini e spiedini pronti da cuocere. Tutto scelto e preparato da Paolo ogni mattina.</p>
-<div class=”mac-carousel”>
-  <div class=”mac-track” id=”macTrack”>
-    <div class=”mac-slide” onclick=”openLightbox(0)”>
-      <img src=”macelleria-pollo-fresco.jpg” alt=”Pollo fresco intero e a pezzi al banco macelleria” loading=”lazy”>
-      <span class=”mac-label”>Pollo fresco intero e a pezzi</span>
-    </div>
-    <div class=”mac-slide” onclick=”openLightbox(1)”>
-      <img src=”macelleria-banco-carne.jpg” alt=”Tagli di carne fresca e pollo al banco” loading=”lazy”>
-      <span class=”mac-label”>Tagli di pollo e carne fresca</span>
-    </div>
-    <div class=”mac-slide” onclick=”openLightbox(2)”>
-      <img src=”macelleria-salsicce.jpg” alt=”Carne fresca e salsicce artigianali” loading=”lazy”>
-      <span class=”mac-label”>Carne e salsicce artigianali</span>
-    </div>
-    <div class=”mac-slide” onclick=”openLightbox(3)”>
-      <img src=”macelleria-spiedini.jpg” alt=”Involtini, spiedini e würstel pronti al banco” loading=”lazy”>
-      <span class=”mac-label”>Involtini, spiedini e würstel</span>
-    </div>
-  </div>
-  <button class=”mac-btn mac-btn--prev” onclick=”moveCarousel(-1)” aria-label=”Precedente”>&#8249;</button>
-  <button class=”mac-btn mac-btn--next” onclick=”moveCarousel(1)” aria-label=”Successivo”>&#8250;</button>
-  <div class=”mac-dots” id=”macDots”>
-    <span class=”mac-dot active” onclick=”goToSlide(0)”></span>
-    <span class=”mac-dot” onclick=”goToSlide(1)”></span>
-    <span class=”mac-dot” onclick=”goToSlide(2)”></span>
-    <span class=”mac-dot” onclick=”goToSlide(3)”></span>
-  </div>
-</div>
-
-<!-- LIGHTBOX -->
-<div class=”lb-overlay” id=”lbOverlay” onclick=”closeLightbox()”>
-  <button class=”lb-close” onclick=”closeLightbox()” aria-label=”Chiudi”>&#10005;</button>
-  <button class=”lb-prev” onclick=”event.stopPropagation(); lbMove(-1)” aria-label=”Precedente”>&#8249;</button>
-  <img class=”lb-img” id=”lbImg” src=”” alt=””>
-  <button class=”lb-next” onclick=”event.stopPropagation(); lbMove(1)” aria-label=”Successivo”>&#8250;</button>
-  <p class=”lb-caption” id=”lbCaption”></p>
+<div class=”mac-grid”>
+  <figure class=”mac-fig”>
+    <img src=”macelleria-pollo-fresco.jpg” alt=”Pollo fresco intero e a pezzi al banco macelleria” loading=”lazy”>
+    <figcaption>Pollo fresco intero e a pezzi</figcaption>
+  </figure>
+  <figure class=”mac-fig”>
+    <img src=”macelleria-banco-carne.jpg” alt=”Tagli di carne fresca e pollo al banco” loading=”lazy”>
+    <figcaption>Tagli di pollo e carne fresca</figcaption>
+  </figure>
+  <figure class=”mac-fig”>
+    <img src=”macelleria-salsicce.jpg” alt=”Carne fresca e salsicce artigianali” loading=”lazy”>
+    <figcaption>Carne e salsicce artigianali</figcaption>
+  </figure>
+  <figure class=”mac-fig”>
+    <img src=”macelleria-spiedini.jpg” alt=”Involtini, spiedini e würstel pronti al banco” loading=”lazy”>
+    <figcaption>Involtini, spiedini e würstel</figcaption>
+  </figure>
 </div>
 </div>
 </section>
@@ -811,7 +777,7 @@
     const el = document.getElementById('todayStrip');
     const today = new Date().getDay();
     if (schedule[today]) {
-      el.innerHTML = 'ðŸ“ Oggi (' + schedule[today].day + ') siamo a <b>' + schedule[today].town + '</b>';
+      el.innerHTML = '&#x1F4CD; Oggi (' + schedule[today].day + ') siamo a <b>' + schedule[today].town + '</b>';
     } else {
       let next = null;
       for (let i = 1; i <= 7; i++){
