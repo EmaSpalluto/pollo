@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PM Gastronomia — Pollo allo Spiedo e Macelleria su Ruote | Mauro &amp; Paolo</title>
+<meta name="description" content="PM Gastronomia: food truck a conduzione familiare di Mauro e Paolo. Pollo allo spiedo, alette panate e fritte, cosce alla griglia, patate, fritti e macelleria. Ogni giorno in un mercato diverso del Salento.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== Token system ===== */
+  :root{
+    --char: #1c150f;
+    --char-2: #2a2017;
+    --char-3: #3a2c1d;
+    --flame: #d9531e;
+    --flame-deep: #aa3c12;
+    --gold: #e3a23b;
+    --gold-soft: #f0c073;
+    --paper: #f3e9d6;
+    --paper-2: #e9dcc0;
+    --ink: #2b2118;
+    --olive: #5b6b3e;
+    --shadow: rgba(20,12,5,0.35);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--char);
+    color:var(--paper);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{margin:0; padding:0; list-style:none;}
+  h1,h2,h3{font-family:'Anton', sans-serif; letter-spacing:0.02em; line-height:1.05; margin:0;}
+  .container{max-width:1160px; margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    font-size:0.78rem;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{content:""; width:22px; height:2px; background:currentColor; display:inline-block;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:3px; border-radius:2px;}
+  .skip-link{position:absolute; left:-999px; top:0; background:var(--gold); color:var(--ink); padding:10px 16px; font-weight:600; z-index:200;}
+  .skip-link:focus{left:12px; top:12px;}
+
+  /* ===== Buttons ===== */
+  .btn{
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    font-size:0.92rem;
+    padding:15px 30px;
+    border-radius:3px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    border:2px solid transparent;
+    cursor:pointer;
+    transition:transform .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .btn--primary{background:var(--flame); color:var(--paper); box-shadow:0 8px 0 0 var(--flame-deep);}
+  .btn--primary:hover{transform:translateY(-3px);}
+  .btn--ghost{border-color:var(--paper); color:var(--paper); background:transparent;}
+  .btn--ghost:hover{background:var(--paper); color:var(--ink);}
+  .btn--dark{border-color:var(--ink); color:var(--ink); background:transparent;}
+  .btn--dark:hover{background:var(--ink); color:var(--paper);}
+
+  /* ===== Header / Nav ===== */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:var(--char);
+    border-bottom:1px solid rgba(227,162,59,0.25);
+  }
+  .navbar{position:relative; z-index:95; display:flex; align-items:center; justify-content:space-between; padding:14px 24px; max-width:1160px; margin:0 auto;}
+  .brand{display:flex; align-items:center; gap:12px; position:relative; z-index:96;}
+  .brand-mark{
+    width:46px; height:46px; border-radius:50%;
+    border:2px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Anton'; font-size:1rem; color:var(--gold);
+    flex-shrink:0;
+  }
+  .brand-text{display:flex; flex-direction:column; line-height:1.1;}
+  .brand-text strong{font-family:'Anton'; font-size:1.05rem; letter-spacing:0.04em; color:var(--paper);}
+  .brand-text span{font-family:'Oswald'; font-size:0.66rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold);}
+  nav.main-nav ul{display:flex; gap:28px;}
+  nav.main-nav a{
+    font-family:'Oswald'; font-size:0.85rem; font-weight:500; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--paper); position:relative; padding:6px 0;
+  }
+  nav.main-nav a::after{content:""; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--flame); transition:width .2s ease;}
+  nav.main-nav a:hover::after{width:100%;}
+  .nav-toggle{display:none; background:none; border:none; color:var(--paper); cursor:pointer; padding:8px; position:relative; z-index:96;}
+  .nav-toggle svg{width:26px; height:26px;}
+
+  /* Today strip */
+  .today-strip{
+    background:var(--gold); color:var(--ink);
+    text-align:center; padding:9px 16px;
+    font-family:'Oswald'; font-weight:600; letter-spacing:0.04em; font-size:0.85rem;
+  }
+  .today-strip b{font-family:'Anton'; letter-spacing:0.02em;}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative; overflow:hidden;
+    padding:90px 0 70px;
+    background:radial-gradient(circle at 80% 20%, rgba(217,83,30,0.18), transparent 55%), var(--char);
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:url('foodtruk.jpg') center center / cover no-repeat;
+    opacity:0.13;
+    z-index:0;
+  }
+  .hero .container{position:relative; z-index:1;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:40px; align-items:center;}
+  .hero-eyebrow{color:var(--gold); margin-bottom:18px;}
+  .hero h1{font-size:clamp(2.6rem, 5.4vw, 4.4rem); color:var(--paper);}
+  .hero h1 em{font-style:normal; color:var(--flame);}
+  .hero p.lead{font-size:1.08rem; color:var(--paper-2); max-width:480px; margin:22px 0 32px;}
+  .hero-actions{display:flex; flex-wrap:wrap; gap:16px;}
+
+  /* Spit illustration */
+  .spit-wrap{position:relative; display:flex; justify-content:center;}
+  .spit-wrap svg{width:100%; max-width:420px; height:auto;}
+  @media (prefers-reduced-motion: no-preference){
+    .spin-piece{animation:spin 6s linear infinite; transform-box:fill-box; transform-origin:center;}
+    .spin-piece.p2{animation-duration:6.4s;}
+    .spin-piece.p3{animation-duration:5.7s;}
+    .oven-glow{animation:glow 1.6s ease-in-out infinite;}
+  }
+  @keyframes spin{from{transform:rotate(0deg);} to{transform:rotate(360deg);}}
+  @keyframes glow{0%,100%{opacity:0.42;} 50%{opacity:0.68;}}
+
+  /* ===== Generic section ===== */
+  .section{padding:88px 0;}
+  .section--paper{background:var(--paper); color:var(--ink);}
+  .section--paper .eyebrow{color:var(--flame-deep);}
+  .section--dark{background:var(--char);}
+  .section--dark2{background:var(--char-2);}
+  .section h2{font-size:clamp(2rem, 3.6vw, 2.8rem); margin:14px 0 18px;}
+  .section--paper h2{color:var(--ink);}
+  .section--dark h2, .section--dark2 h2{color:var(--paper);}
+
+  /* Made fresh strip */
+  .fresh-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:50px; align-items:center;}
+  .fresh-points{display:flex; flex-direction:column; gap:18px; margin-top:24px;}
+  .fresh-point{display:flex; gap:14px; align-items:flex-start;}
+  .fresh-point .dot{width:10px; height:10px; border-radius:50%; background:var(--flame); margin-top:8px; flex-shrink:0;}
+  .fresh-point p{margin:0; color:var(--ink);}
+  .fresh-point strong{display:block; font-family:'Oswald'; text-transform:uppercase; letter-spacing:0.04em; font-size:0.95rem; margin-bottom:2px;}
+  .fresh-photo-wrap{position:relative;}
+  .fresh-photo{width:100%; max-height:320px; aspect-ratio:4/3; object-fit:cover; border-radius:16px; display:block; box-shadow:0 18px 40px rgba(43,33,24,0.28);}
+  .seal{
+    width:230px; height:230px; border-radius:50%; margin:0 auto;
+    border:3px dashed var(--flame-deep);
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .seal--floating{
+    position:absolute; right:-26px; bottom:-30px;
+    width:138px; height:138px;
+    background:var(--paper); box-shadow:0 12px 26px rgba(43,33,24,0.35);
+  }
+  .seal--floating .seal-inner strong{font-size:1.3rem;}
+  .seal--floating .seal-inner span{font-size:0.5rem; letter-spacing:0.12em;}
+  .seal::before{content:""; position:absolute; inset:14px; border:1px solid var(--flame-deep); border-radius:50%; opacity:0.5;}
+  .seal-inner{text-align:center;}
+  .seal-inner strong{display:block; font-family:'Anton'; font-size:2.1rem; color:var(--flame-deep); letter-spacing:0.03em;}
+  .seal-inner span{display:block; font-family:'Oswald'; font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink); margin-top:4px;}
+
+  /* About */
+  .about-grid{display:grid; grid-template-columns:0.95fr 1.05fr; gap:56px; align-items:center;}
+  .about-grid p{color:var(--paper-2); max-width:520px;}
+  .about-photo-wrap{margin-top:56px; text-align:center;}
+  .about-photo{width:100%; max-height:420px; object-fit:cover; border-radius:16px; display:block; box-shadow:0 18px 40px rgba(0,0,0,0.4);}
+  .about-photo-caption{margin-top:14px; font-family:'Oswald'; font-size:0.85rem; letter-spacing:0.03em; color:var(--gold-soft);}
+  .about-badges{display:flex; gap:14px; margin-top:26px; flex-wrap:wrap;}
+  .badge{
+    font-family:'Oswald'; font-size:0.78rem; letter-spacing:0.06em; text-transform:uppercase;
+    border:1px solid rgba(227,162,59,0.5); color:var(--gold); padding:9px 16px; border-radius:30px;
+  }
+  .brothers-card{
+    background:var(--char-2); border:1px solid var(--char-3); border-radius:6px; padding:34px;
+    position:relative;
+  }
+  .brothers-card .tag{position:absolute; top:-14px; left:30px; background:var(--flame); color:var(--paper); font-family:'Courier Prime'; font-size:0.78rem; padding:5px 12px; transform:rotate(-2deg); box-shadow:0 4px 8px var(--shadow);}
+  .brothers-names{display:flex; gap:24px; margin-top:8px;}
+  .brother{flex:1;}
+  .brother .initial{
+    width:58px; height:58px; border-radius:50%; background:var(--char-3); border:2px solid var(--gold);
+    display:flex; align-items:center; justify-content:center; font-family:'Anton'; color:var(--gold); font-size:1.3rem; margin-bottom:10px;
+  }
+  .brother strong{display:block; font-family:'Oswald'; text-transform:uppercase; letter-spacing:0.04em; color:var(--paper);}
+  .brother span{font-size:0.88rem; color:var(--paper-2);}
+
+  /* Menu */
+  .menu-intro{max-width:600px;}
+  .menu-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; margin-top:48px;}
+  .menu-card{
+    background:var(--char-2); border:1px solid var(--char-3); border-radius:6px; padding:30px 26px;
+    transition:transform .2s ease, border-color .2s ease;
+  }
+  .menu-card:hover{transform:translateY(-6px); border-color:var(--flame);}
+  .menu-icon{width:48px; height:48px; color:var(--gold); margin-bottom:18px;}
+  .menu-card h3{font-family:'Oswald'; font-size:1.12rem; text-transform:uppercase; letter-spacing:0.03em; color:var(--paper); margin-bottom:10px;}
+  .menu-card p{margin:0; color:var(--paper-2); font-size:0.94rem;}
+  .menu-note{margin-top:30px; font-size:0.85rem; color:var(--paper-2); font-style:italic;}
+
+  /* Galleria */
+  .gallery-grid{
+    display:flex; flex-wrap:wrap;
+    gap:14px; margin-top:36px;
+  }
+  .gallery-item{position:relative; margin:0; border-radius:12px; overflow:hidden; flex:1 1 220px; height:150px;}
+  .gallery-item--wide{flex-basis:100%; height:180px;}
+  .gallery-item img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease;}
+  .gallery-item:hover img{transform:scale(1.06);}
+  .gallery-item figcaption{
+    position:absolute; left:0; right:0; bottom:0; padding:10px 12px 9px;
+    background:linear-gradient(to top, rgba(28,21,15,0.92), transparent);
+    color:var(--paper); font-family:'Oswald'; font-size:0.74rem; letter-spacing:0.02em;
+  }
+  @media (max-width:760px){
+    .gallery-item{flex-basis:45%; height:170px;}
+  }
+  @media (max-width:480px){
+    .gallery-item{flex-basis:100%; height:200px;}
+  }
+
+  /* Pronto al banco gallery */
+  .pronto-gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:36px;}
+  .pronto-item{margin:0; border-radius:12px; overflow:hidden; position:relative; height:220px;}
+  .pronto-item img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease;}
+  .pronto-item:hover img{transform:scale(1.05);}
+  .pronto-item figcaption{
+    position:absolute; left:0; right:0; bottom:0; padding:10px 14px;
+    background:linear-gradient(to top, rgba(28,21,15,0.92), transparent);
+    color:var(--paper); font-family:'Oswald'; font-size:0.8rem; letter-spacing:0.02em;
+  }
+  @media (max-width:760px){.pronto-gallery{grid-template-columns:1fr;} .pronto-item{height:200px;}}
+
+  /* Macelleria carousel */
+  .mac-carousel{position:relative; overflow:hidden; border-radius:14px; margin-top:0;}
+  .mac-track{display:flex; transition:transform .4s ease;}
+  .mac-slide{min-width:calc(33.333% - 10px); margin-right:14px; border-radius:12px; overflow:hidden; position:relative; cursor:pointer; flex-shrink:0;}
+  .mac-slide img{width:100%; height:200px; object-fit:cover; display:block; transition:transform .3s ease;}
+  .mac-slide:hover img{transform:scale(1.04);}
+  .mac-label{position:absolute; bottom:0; left:0; right:0; padding:8px 12px; background:linear-gradient(to top,rgba(28,21,15,0.9),transparent); color:var(--paper); font-family:'Oswald'; font-size:0.78rem; letter-spacing:0.02em;}
+  .mac-btn{position:absolute; top:50%; transform:translateY(-50%); background:rgba(28,21,15,0.7); color:var(--gold); border:none; border-radius:50%; width:40px; height:40px; font-size:1.6rem; cursor:pointer; z-index:2; display:flex; align-items:center; justify-content:center; line-height:1; transition:background .2s;}
+  .mac-btn:hover{background:var(--flame);}
+  .mac-btn--prev{left:8px;}
+  .mac-btn--next{right:8px;}
+  .mac-dots{display:flex; justify-content:center; gap:8px; margin-top:14px;}
+  .mac-dot{width:8px; height:8px; border-radius:50%; background:var(--char-3); cursor:pointer; transition:background .2s;}
+  .mac-dot.active{background:var(--flame);}
+  /* Lightbox */
+  .lb-overlay{display:none; position:fixed; inset:0; background:rgba(10,6,3,0.93); z-index:999; align-items:center; justify-content:center; flex-direction:column;}
+  .lb-overlay.open{display:flex;}
+  .lb-img{max-width:90vw; max-height:80vh; border-radius:8px; object-fit:contain;}
+  .lb-caption{color:var(--paper-2); font-family:'Oswald'; font-size:0.9rem; margin-top:14px; letter-spacing:0.04em;}
+  .lb-close{position:absolute; top:18px; right:22px; background:none; border:none; color:var(--paper); font-size:1.8rem; cursor:pointer; z-index:1000;}
+  .lb-prev, .lb-next{position:absolute; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--gold); font-size:3rem; cursor:pointer; padding:0 20px; z-index:1000;}
+  .lb-prev{left:0;} .lb-next{right:0;}
+  @media(max-width:760px){.mac-slide{min-width:calc(100% - 14px);}}
+
+  /* Values */
+  .value-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px; margin-top:46px;}
+  .value-card{background:var(--paper-2); border-radius:6px; padding:30px;}
+  .value-card .num{font-family:'Courier Prime'; font-weight:700; color:var(--flame-deep); font-size:0.95rem;}
+  .value-card h3{font-family:'Oswald'; text-transform:uppercase; letter-spacing:0.03em; font-size:1.05rem; margin:10px 0 8px; color:var(--ink);}
+  .value-card p{margin:0; color:#564a3c; font-size:0.94rem;}
+
+  /* Schedule tickets */
+  .schedule-row{display:grid; grid-template-columns:repeat(5,1fr); gap:18px; margin-top:50px;}
+  .ticket{
+    background:var(--paper); color:var(--ink); border-radius:4px; padding:26px 18px 22px; text-align:center;
+    position:relative; border:1px solid var(--paper-2);
+  }
+  .ticket::before, .ticket::after{
+    content:""; position:absolute; width:18px; height:18px; background:var(--char); border-radius:50%;
+    left:50%; transform:translateX(-50%);
+  }
+  .ticket::before{top:-10px;} .ticket::after{bottom:-10px;}
+  .ticket .day{font-family:'Oswald'; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; font-size:0.78rem; color:var(--flame-deep);}
+  .ticket .town{font-family:'Anton'; font-size:1.5rem; margin:10px 0 8px; line-height:1.1;}
+  .ticket .meta{font-family:'Courier Prime'; font-size:0.74rem; color:#7a6c57; border-top:1px dashed #c9bb9d; padding-top:10px; margin-top:10px;}
+  .schedule-note{margin-top:26px; color:var(--paper-2); font-size:0.92rem; text-align:center;}
+
+  /* Reservation */
+  .reserve-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:50px;}
+  .reserve-info p{color:var(--ink); max-width:380px;}
+  .info-line{display:flex; gap:12px; align-items:flex-start; margin-top:18px;}
+  .info-line svg{width:20px; height:20px; color:var(--flame-deep); flex-shrink:0; margin-top:2px;}
+  .info-line strong{display:block; font-family:'Oswald'; text-transform:uppercase; font-size:0.8rem; letter-spacing:0.05em;}
+  form.reserve-form{background:var(--char-2); border:1px solid var(--char-3); border-radius:6px; padding:34px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-family:'Oswald'; font-size:0.78rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--gold); margin-bottom:7px;}
+  .field input, .field select, .field textarea{
+    width:100%; padding:12px 14px; border-radius:4px; border:1px solid var(--char-3);
+    background:var(--char); color:var(--paper); font-family:'Work Sans'; font-size:0.96rem;
+  }
+  .field textarea{resize:vertical; min-height:88px;}
+  .field input::placeholder, .field textarea::placeholder{color:#8a7c68;}
+  .form-foot{display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-top:6px;}
+  .form-status{font-size:0.88rem; color:var(--gold);}
+
+  /* Footer / receipt */
+  footer{background:var(--char);}
+  .receipt-edge{height:16px; background-image:linear-gradient(135deg, transparent 50%, var(--paper) 50%), linear-gradient(45deg, var(--paper) 50%, transparent 50%); background-size:18px 18px; background-position:0 0, 9px 0; background-repeat:repeat-x;}
+  .receipt{background:var(--paper); color:var(--ink); padding:40px 0 0;}
+  .receipt-paper{
+    max-width:420px; margin:0 auto; background:#fdf9ef; padding:30px 26px; font-family:'Courier Prime';
+    box-shadow:0 18px 30px -10px var(--shadow);
+  }
+  .receipt-paper .center{text-align:center;}
+  .receipt-paper h3{font-family:'Courier Prime'; font-weight:700; font-size:0.98rem; letter-spacing:0.04em; margin:0 0 4px;}
+  .receipt-paper p{margin:2px 0; font-size:0.82rem; line-height:1.5;}
+  .receipt-dash{border-top:1px dashed #9a8c74; margin:16px 0;}
+  .receipt-paper .thanks{font-size:0.9rem; font-weight:700; margin-top:4px;}
+  .footer-links{display:flex; justify-content:center; gap:26px; flex-wrap:wrap; margin:34px 0 0; font-family:'Oswald'; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.05em;}
+  .footer-links a{padding-bottom:4px; border-bottom:1px solid transparent;}
+  .footer-links a:hover{border-color:var(--flame-deep);}
+  .footer-bottom{text-align:center; padding:26px 0 38px; font-size:0.8rem; color:#7a6c57;}
+
+  /* ===== Responsive ===== */
+  @media (max-width: 900px){
+    .hero-grid, .fresh-grid, .about-grid, .reserve-grid{grid-template-columns:1fr; gap:40px;}
+    .spit-wrap{order:-1;}
+    .menu-grid{grid-template-columns:repeat(2,1fr);}
+    .value-grid{grid-template-columns:1fr 1fr;}
+    .schedule-row{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (max-width: 760px){
+    nav.main-nav{position:fixed; inset:0; top:0; background:var(--char); flex-direction:column; padding:90px 30px 30px; transform:translateX(100%); transition:transform .25s ease; z-index:90;}
+    nav.main-nav.open{transform:translateX(0);}
+    nav.main-nav ul{flex-direction:column; gap:0;}
+    nav.main-nav li{border-bottom:1px solid var(--char-3);}
+    nav.main-nav a{display:block; padding:18px 0;}
+    .nav-toggle{display:block;}
+    .menu-grid{grid-template-columns:1fr;}
+    .value-grid{grid-template-columns:1fr;}
+    .schedule-row{grid-template-columns:repeat(2,1fr);}
+    .form-row{grid-template-columns:1fr;}
+    .hero-actions{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+<a href="#contenuto" class="skip-link">Vai al contenuto</a>
+
+<header>
+<div class="navbar">
+<a href="#home" class="brand">
+<span class="brand-mark">P&amp;M</span>
+<span class="brand-text"><strong>PM GASTRONOMIA</strong><span>di Mauro &amp; Paolo</span></span>
+</a>
+<nav class="main-nav" id="mainNav">
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#chi-siamo">Chi siamo</a></li>
+<li><a href="#menu">Menù</a></li>
+<li><a href="#mercati">Mercati</a></li>
+<li><a href="#prenota">Prenota</a></li>
+<li><a href="#contatti">Contatti</a></li>
+</ul>
+</nav>
+<button class="nav-toggle" id="navToggle" aria-label="Apri il menu di navigazione" aria-expanded="false" aria-controls="mainNav">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+</button>
+</div>
+<div class="today-strip" id="todayStrip">Caricamento posizione di oggiâ€¦</div>
+</header>
+
+<main id="contenuto">
+
+<!-- HERO -->
+<section class="hero" id="home">
+<div class="container hero-grid">
+<div>
+<p class="hero-eyebrow eyebrow">Food truck · macelleria · rosticceria</p>
+<h1>LA GRIGLIA<br>VIAGGIA <em>CON NOI</em></h1>
+<p class="lead">Mauro e Paolo portano pollo allo spiedo, carne scelta e fritti caldi nei mercati del Salento. Ogni giorno un paese diverso, sempre la stessa qualitÃ  di famiglia.</p>
+<div class="hero-actions">
+<a href="#menu" class="btn btn--primary">Scopri il menù</a>
+<a href="#prenota" class="btn btn--ghost">Prenota il tuo ordine</a>
+</div>
+</div>
+<div class="spit-wrap" aria-hidden="true">
+<svg viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg">
+<!-- stand -->
+<rect x="60" y="60" width="14" height="220" rx="4" fill="#3a2c1d"/>
+<rect x="346" y="60" width="14" height="220" rx="4" fill="#3a2c1d"/>
+<rect x="40" y="270" width="340" height="14" rx="4" fill="#241a12"/>
+<!-- skewer bar -->
+<rect x="50" y="140" width="320" height="10" rx="5" fill="#7a6c57"/>
+<!-- chicken pieces -->
+<g class="spin-piece p1">
+<ellipse cx="140" cy="145" rx="42" ry="38" fill="#e3a23b"/>
+<ellipse cx="140" cy="145" rx="42" ry="38" fill="none" stroke="#aa3c12" stroke-width="3" opacity="0.4"/>
+<path d="M108 120c-10-6-20-4-26 4 8 2 16 6 20 12z" fill="#d9531e"/>
+</g>
+<g class="spin-piece p2">
+<ellipse cx="210" cy="145" rx="40" ry="36" fill="#eab15a"/>
+<ellipse cx="210" cy="145" rx="40" ry="36" fill="none" stroke="#aa3c12" stroke-width="3" opacity="0.4"/>
+</g>
+<g class="spin-piece p3">
+<ellipse cx="280" cy="145" rx="38" ry="34" fill="#e3a23b"/>
+<ellipse cx="280" cy="145" rx="38" ry="34" fill="none" stroke="#aa3c12" stroke-width="3" opacity="0.4"/>
+<path d="M305 118c10-6 20-4 26 4-8 2-16 6-20 12z" fill="#d9531e"/>
+</g>
+<!-- forno e griglia -->
+<g transform="translate(0,180)">
+<rect x="38" y="55" width="344" height="46" rx="10" fill="#241a12"/>
+<rect class="oven-glow" x="50" y="62" width="320" height="32" rx="6" fill="#d9531e" opacity="0.5"/>
+<rect x="50" y="68" width="320" height="6" rx="3" fill="#3a2c1d"/>
+<rect x="50" y="80" width="320" height="6" rx="3" fill="#3a2c1d"/>
+<rect x="50" y="92" width="320" height="6" rx="3" fill="#3a2c1d"/>
+</g>
+</svg>
+</div>
+</div>
+</section>
+
+<!-- FATTO FRESCO -->
+<section class="section section--paper">
+<div class="container fresh-grid">
+<div>
+<p class="eyebrow">Ogni giorno, fuoco vero</p>
+<h2>Pollo allo spiedo, cotto sul posto</h2>
+<p>Il pollo gira lento sullo spiedo per tutto il giorno, cotto su un'enorme griglia posizionata sopra il forno: dorato fuori, morbido dentro. Nessun congelato, nessuna scorciatoia â€” solo calore vero, tempo e la ricetta che Mauro e Paolo si sono tramandati in famiglia.</p>
+<div class="fresh-points">
+<div class="fresh-point"><span class="dot"></span><p><strong>Cotto in giornata</strong>Si arriva al mercato, si accende il forno e la griglia, si cucina davanti a voi.</p></div>
+<div class="fresh-point"><span class="dot"></span><p><strong>Carne selezionata</strong>I tagli passano prima dal banco della nostra macelleria.</p></div>
+<div class="fresh-point"><span class="dot"></span><p><strong>Pronto da portare a casa</strong>Confezionato caldo, pronto per la tavola.</p></div>
+</div>
+</div>
+<div class="fresh-photo-wrap">
+<img src="pollo-spiedo.jpg" alt="Carne trita fresca preparata al banco della macelleria" class="fresh-photo">
+<div class="seal seal--floating">
+<div class="seal-inner">
+<strong>P&amp;M</strong>
+<span>Conduzione&nbsp;familiare</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CHI SIAMO -->
+<section class="section section--dark" id="chi-siamo">
+<div class="container about-grid">
+<div class="brothers-card">
+<span class="tag">dal furgone al mercato</span>
+<p class="eyebrow" style="color:var(--gold)">Due fratelli, un furgone</p>
+<div class="brothers-names">
+<div class="brother">
+<span class="initial">M</span>
+<strong>Mauro</strong>
+<span>Griglia e cottura allo spiedo</span>
+</div>
+<div class="brother">
+<span class="initial">P</span>
+<strong>Paolo</strong>
+<span>Banco macelleria e taglio carne</span>
+</div>
+</div>
+</div>
+<div>
+<p class="eyebrow" style="color:var(--gold)">Chi siamo</p>
+<h2>PM Gastronomia</h2>
+<p>Nasce dall'idea di due fratelli: portare la qualitÃ  di una vera macelleria di paese dentro un food truck, mercato dopo mercato. Mauro si occupa della griglia, Paolo della scelta della carne: insieme preparano ogni giorno polli, alette, cosce, fritti e patate, pronti da gustare sul posto o da portare a casa.</p>
+<div class="about-badges">
+<span class="badge">Conduzione familiare</span>
+<span class="badge">5 mercati a settimana</span>
+<span class="badge">Anche su prenotazione</span>
+</div>
+</div>
+</div>
+<div class="container about-photo-wrap">
+<img src="foodtruk.jpg" alt="Il furgone PM Gastronomia al mercato, con banco rosticceria, friggitoria e macelleria" class="about-photo">
+<p class="about-photo-caption">Il nostro furgone, pronto ogni giorno in un mercato diverso del Salento.</p>
+</div>
+</section>
+
+<!-- MENU -->
+<section class="section section--dark2" id="menu">
+<div class="container">
+<div class="menu-intro">
+<p class="eyebrow" style="color:var(--gold)">Cosa trovate al banco</p>
+<h2>Il nostro menù</h2>
+</div>
+<div class="menu-grid">
+
+<div class="menu-card">
+<svg class="menu-icon" viewBox="0 0 64 64"><rect x="2" y="29" width="60" height="5" rx="2.5" fill="var(--flame)"/><path d="M58 25 L64 31.5 L58 38 Z" fill="var(--flame)"/><rect x="6" y="19" width="14" height="24" rx="7" fill="currentColor"/><rect x="25" y="19" width="14" height="24" rx="7" fill="currentColor"/><rect x="44" y="19" width="14" height="24" rx="7" fill="currentColor"/></svg>
+<h3>Pollo allo spiedo</h3>
+<p>Pollo intero o a metÃ , girato lentamente su un'enorme griglia sopra il forno, fino a doratura perfetta.</p>
+</div>
+
+<div class="menu-card">
+<svg class="menu-icon" viewBox="0 0 64 64" fill="currentColor"><ellipse cx="38" cy="42" rx="20" ry="18"/><rect x="14" y="10" width="10" height="26" rx="5" transform="rotate(-25 19 23)"/><circle cx="11" cy="11" r="6"/><circle cx="22" cy="6" r="6"/></svg>
+<h3>Cosce alla griglia</h3>
+<p>Cosce di pollo succose, marinate e grigliate lentamente sull'enorme grill sopra il forno.</p>
+</div>
+
+<div class="menu-card">
+<svg class="menu-icon" viewBox="0 0 64 64" fill="currentColor"><path d="M6 50c8-30 28-42 50-40-7 4-12 11-13 19 9-2 15 1 19 8-16 1-25 10-30 21-6-3-15-3-21 1 1-9-3-7-5-9z"/></svg>
+<h3>Alette panate e fritte</h3>
+<p>Alette panate a mano e fritte croccanti: da gustare calde, appena pronte.</p>
+</div>
+
+<div class="menu-card">
+<svg class="menu-icon" viewBox="0 0 64 64" fill="currentColor"><path d="M9 52 L18 12 L27 52 Z"/><path d="M28 52 L37 8 L46 52 Z"/><path d="M47 52 L54 16 L61 52 Z"/></svg>
+<h3>Patate al forno</h3>
+<p>Patate a spicchi cotte al calore del forno, dorate e profumate.</p>
+</div>
+
+<div class="menu-card">
+<svg class="menu-icon" viewBox="0 0 64 64"><rect x="18" y="8" width="7" height="26" rx="2" fill="var(--flame)" stroke="var(--char-2)" stroke-width="2"/><rect x="28" y="2" width="7" height="32" rx="2" fill="var(--flame)" stroke="var(--char-2)" stroke-width="2"/><rect x="38" y="8" width="7" height="26" rx="2" fill="var(--flame)" stroke="var(--char-2)" stroke-width="2"/><path d="M12 26 L52 26 L45 58 L19 58 Z" fill="currentColor"/></svg>
+<h3>Patatine fritte</h3>
+<p>Le classiche patatine fritte: croccanti fuori, morbide dentro.</p>
+</div>
+
+<div class="menu-card">
+<svg class="menu-icon" viewBox="0 0 64 64" fill="currentColor"><circle cx="20" cy="40" r="13" stroke="var(--char-2)" stroke-width="3"/><circle cx="32" cy="23" r="13" stroke="var(--char-2)" stroke-width="3"/><circle cx="44" cy="40" r="13" stroke="var(--char-2)" stroke-width="3"/></svg>
+<h3>Frittini misti</h3>
+<p>Una selezione di fritti caldi, perfetti da abbinare a tutto il resto.</p>
+</div>
+
+<div class="menu-card">
+<svg class="menu-icon" viewBox="0 0 64 64"><rect x="2" y="22" width="16" height="16" rx="5" fill="var(--flame)"/><path d="M18 18 L58 18 L58 32 L40 38 L18 38 Z" fill="currentColor"/></svg>
+<h3>Macelleria</h3>
+<p>Banco di carne fresca selezionata: scegliete il taglio, lo prepariamo per voi.</p>
+</div>
+
+</div>
+<p class="menu-note">Il menù può variare leggermente in base al mercato e alla disponibilitÃ  del giorno.</p>
+
+<div class="pronto-gallery">
+<figure class="pronto-item">
+<img src="banco-pronto-1.jpg" alt="Banco con fritti, pollo e carne pronta" loading="lazy">
+<figcaption>Il banco pronto al mercato</figcaption>
+</figure>
+<figure class="pronto-item">
+<img src="banco-pronto-2.jpg" alt="Frittini misti, alette e pollo pronti" loading="lazy">
+<figcaption>Frittini, alette e pollo</figcaption>
+</figure>
+<figure class="pronto-item">
+<img src="banco-pronto-3.jpg" alt="Carne grigliata e patate pronte al banco" loading="lazy">
+<figcaption>Carne grigliata e contorni</figcaption>
+</figure>
+</div>
+</div>
+</section>
+
+<!-- GALLERIA -->
+<section class="section section--dark">
+<div class="container">
+<p class="eyebrow">Uno sguardo dal furgone</p>
+<h2>Tutto vero, tutto fatto da noi</h2>
+<div class="gallery-grid">
+<figure class="gallery-item">
+<img src="banco-pronto-1.jpg" alt="Controllo della qualitÃ  della carne al banco" loading="lazy" style="object-position:center 30%;">
+<figcaption>Il controllo finale, sempre a naso e a occhio.</figcaption>
+</figure>
+<figure class="gallery-item">
+<img src="banco-pronto-2.jpg" alt="Vetrina con costine, involtini e frittini misti pronti" loading="lazy">
+<figcaption>Frittini misti, pronti in vetrina.</figcaption>
+</figure>
+<figure class="gallery-item">
+<img src="banco-pronto-3.jpg" alt="Banco vendita del furgone PM Gastronomia con cliente" loading="lazy">
+<figcaption>Al banco, mercato dopo mercato.</figcaption>
+</figure>
+<figure class="gallery-item">
+<img src="macelleria-banco-carne.jpg" alt="Tagli di carne fresca e pollo nella vetrina della macelleria" loading="lazy">
+<figcaption>I tagli del giorno, sempre freschi.</figcaption>
+</figure>
+<figure class="gallery-item">
+<img src="macelleria-salsicce.jpg" alt="Salsicce e capocollo nella vetrina della macelleria" loading="lazy">
+<figcaption>Salsiccia mista e capocollo fatti in casa.</figcaption>
+</figure>
+<figure class="gallery-item">
+<img src="macelleria-spiedini.jpg" alt="Bracioline e salsicce pronte al banco" loading="lazy">
+<figcaption>Bracioline pronte per la griglia.</figcaption>
+</figure>
+<figure class="gallery-item gallery-item--wide">
+<img src="pollo-spiedo.jpg" alt="Polli interi cotti sullo spiedo nel forno del nostro furgone" loading="lazy">
+<figcaption>Il forno vero, dove tutto comincia ogni mattina.</figcaption>
+</figure>
+</div>
+</div>
+</section>
+
+<!-- MACELLERIA -->
+<section class="section section--dark2" id="macelleria">
+<div class="container">
+<p class="eyebrow" style="color:var(--gold)">Carne fresca ogni giorno</p>
+<h2>Il banco della macelleria</h2>
+<p style="color:var(--paper-2); max-width:620px; margin-bottom:40px;">Accanto alla rosticceria trovate il nostro banco di macelleria: pollo intero e a pezzi, tagli di carne fresca, salsicce artigianali, involtini e spiedini pronti da cuocere. Tutto scelto e preparato da Paolo ogni mattina.</p>
+<div class=”mac-carousel”>
+  <div class=”mac-track” id=”macTrack”>
+    <div class=”mac-slide” onclick=”openLightbox(0)”>
+      <img src=”macelleria-pollo-fresco.jpg” alt=”Pollo fresco intero e a pezzi al banco macelleria” loading=”lazy”>
+      <span class=”mac-label”>Pollo fresco intero e a pezzi</span>
+    </div>
+    <div class=”mac-slide” onclick=”openLightbox(1)”>
+      <img src=”macelleria-banco-carne.jpg” alt=”Tagli di carne fresca e pollo al banco” loading=”lazy”>
+      <span class=”mac-label”>Tagli di pollo e carne fresca</span>
+    </div>
+    <div class=”mac-slide” onclick=”openLightbox(2)”>
+      <img src=”macelleria-salsicce.jpg” alt=”Carne fresca e salsicce artigianali” loading=”lazy”>
+      <span class=”mac-label”>Carne e salsicce artigianali</span>
+    </div>
+    <div class=”mac-slide” onclick=”openLightbox(3)”>
+      <img src=”macelleria-spiedini.jpg” alt=”Involtini, spiedini e würstel pronti al banco” loading=”lazy”>
+      <span class=”mac-label”>Involtini, spiedini e würstel</span>
+    </div>
+  </div>
+  <button class=”mac-btn mac-btn--prev” onclick=”moveCarousel(-1)” aria-label=”Precedente”>&#8249;</button>
+  <button class=”mac-btn mac-btn--next” onclick=”moveCarousel(1)” aria-label=”Successivo”>&#8250;</button>
+  <div class=”mac-dots” id=”macDots”>
+    <span class=”mac-dot active” onclick=”goToSlide(0)”></span>
+    <span class=”mac-dot” onclick=”goToSlide(1)”></span>
+    <span class=”mac-dot” onclick=”goToSlide(2)”></span>
+    <span class=”mac-dot” onclick=”goToSlide(3)”></span>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class=”lb-overlay” id=”lbOverlay” onclick=”closeLightbox()”>
+  <button class=”lb-close” onclick=”closeLightbox()” aria-label=”Chiudi”>&#10005;</button>
+  <button class=”lb-prev” onclick=”event.stopPropagation(); lbMove(-1)” aria-label=”Precedente”>&#8249;</button>
+  <img class=”lb-img” id=”lbImg” src=”” alt=””>
+  <button class=”lb-next” onclick=”event.stopPropagation(); lbMove(1)” aria-label=”Successivo”>&#8250;</button>
+  <p class=”lb-caption” id=”lbCaption”></p>
+</div>
+</div>
+</section>
+
+<!-- QUALITA -->
+<section class="section section--paper">
+<div class="container">
+<p class="eyebrow">QualitÃ  che si vede</p>
+<h2>Genuino, come una volta</h2>
+<div class="value-grid">
+<div class="value-card">
+<span class="num">01</span>
+<h3>Freschezza</h3>
+<p>Carne scelta ogni giorno al nostro banco: niente di congelato, niente di lasciato lì da settimane.</p>
+</div>
+<div class="value-card">
+<span class="num">02</span>
+<h3>Tradizione</h3>
+<p>Ricette di famiglia, cotte con i tempi giusti: griglia vera, non scorciatoie.</p>
+</div>
+<div class="value-card">
+<span class="num">03</span>
+<h3>Famiglia</h3>
+<p>Mauro e Paolo sono sempre al furgone: la qualitÃ  la controllano di persona, mercato dopo mercato.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- MERCATI -->
+<section class="section section--dark" id="mercati">
+<div class="container">
+<p class="eyebrow" style="color:var(--gold)">Dove ci trovate</p>
+<h2>Un paese diverso ogni giorno</h2>
+<div class="schedule-row">
+<div class="ticket"><span class="day">Martedì</span><div class="town">Carmiano</div><div class="meta">mercato settimanale</div></div>
+<div class="ticket"><span class="day">Mercoledì</span><div class="town">Novoli</div><div class="meta">mercato settimanale</div></div>
+<div class="ticket"><span class="day">Giovedì</span><div class="town">Brindisi</div><div class="meta">mercato settimanale</div></div>
+<div class="ticket"><span class="day">Venerdì</span><div class="town">Nardò</div><div class="meta">mercato settimanale</div></div>
+<div class="ticket"><span class="day">Sabato</span><div class="town">Francavilla<br>Fontana</div><div class="meta">mercato settimanale</div></div>
+</div>
+<p class="schedule-note">Domenica e lunedì siamo fermi in laboratorio a preparare tutto per la settimana. Orari e punto esatto del mercato disponibili scrivendoci su WhatsApp.</p>
+</div>
+</section>
+
+<!-- PRENOTA -->
+<section class="section section--paper" id="prenota">
+<div class="container reserve-grid">
+<div class="reserve-info">
+<p class="eyebrow">Prenota il tuo ordine</p>
+<h2>Te lo teniamo pronto</h2>
+<p>Vuoi essere sicuro di trovare il tuo pollo o le tue alette pronte al ritiro? Compila il modulo: ti scriviamo su WhatsApp per confermare.</p>
+<div class="info-line">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 0 1 2-2h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5z"/></svg>
+<div><strong>Telefono / WhatsApp</strong><span>+39 0000 000000</span></div>
+</div>
+<div class="info-line">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+<div><strong>Email</strong><span>info@pmgastronomia.it</span></div>
+</div>
+</div>
+<form class="reserve-form" id="reserveForm">
+<div class="form-row">
+<div class="field">
+<label for="nome">Nome e cognome</label>
+<input type="text" id="nome" name="nome" placeholder="Es. Maria Greco" required>
+</div>
+<div class="field">
+<label for="telefono">Telefono</label>
+<input type="tel" id="telefono" name="telefono" placeholder="Es. 333 1234567" required>
+</div>
+</div>
+<div class="form-row">
+<div class="field">
+<label for="mercato">Mercato / giorno</label>
+<select id="mercato" name="mercato" required>
+<option value="">Seleziona...</option>
+<option>Martedì â€” Carmiano</option>
+<option>Mercoledì â€” Novoli</option>
+<option>Giovedì â€” Brindisi</option>
+<option>Venerdì â€” Nardò</option>
+<option>Sabato â€” Francavilla Fontana</option>
+</select>
+</div>
+<div class="field">
+<label for="data">Data ritiro</label>
+<input type="date" id="data" name="data">
+</div>
+</div>
+<div class="field">
+<label for="ordine">Cosa desideri</label>
+<textarea id="ordine" name="ordine" placeholder="Es. 2 polli interi, 1 kg di alette, patate al forno..." required></textarea>
+</div>
+<div class="form-foot">
+<button type="submit" class="btn btn--primary">Invia prenotazione su WhatsApp</button>
+<span class="form-status" id="formStatus"></span>
+</div>
+</form>
+</div>
+</section>
+
+</main>
+
+<footer id="contatti">
+<div class="receipt-edge"></div>
+<div class="receipt">
+<div class="container">
+<div class="receipt-paper">
+<div class="center">
+<h3>PM GASTRONOMIA</h3>
+<p>SOCIETÃ€ COOPERATIVA</p>
+<div class="receipt-dash"></div>
+<p>VIA DEI BASILIANI</p>
+<p>73044 GALATONE (LE)</p>
+<p>PARTITA IVA 04684060751</p>
+<div class="receipt-dash"></div>
+<p>Food truck di Mauro &amp; Paolo</p>
+<p>Mercati: Carmiano · Novoli · Brindisi · Nardò · Francavilla Fontana</p>
+<div class="receipt-dash"></div>
+<p class="thanks">GRAZIE E A PRESTO!</p>
+</div>
+</div>
+<div class="footer-links">
+<a href="#home">Home</a>
+<a href="#chi-siamo">Chi siamo</a>
+<a href="#menu">Menù</a>
+<a href="#mercati">Mercati</a>
+<a href="#prenota">Prenota</a>
+</div>
+<p class="footer-bottom">Â© 2026 PM Gastronomia â€” SocietÃ  Cooperativa. Tutti i diritti riservati.</p>
+</div>
+</div>
+</footer>
+
+<script>
+  // ----- Nav mobile toggle -----
+  const navToggle = document.getElementById('navToggle');
+  const mainNav = document.getElementById('mainNav');
+  const iconBurger = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+  const iconClose = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>';
+  function setNav(open){
+    mainNav.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    navToggle.setAttribute('aria-label', open ? 'Chiudi il menu di navigazione' : 'Apri il menu di navigazione');
+    navToggle.innerHTML = open ? iconClose : iconBurger;
+  }
+  navToggle.addEventListener('click', () => setNav(!mainNav.classList.contains('open')));
+  mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setNav(false)));
+
+  // ----- Today strip: calcola dove siamo oggi -----
+  const schedule = {
+    2: { day: 'Martedì', town: 'Carmiano' },
+    3: { day: 'Mercoledì', town: 'Novoli' },
+    4: { day: 'Giovedì', town: 'Brindisi' },
+    5: { day: 'Venerdì', town: 'Nardò' },
+    6: { day: 'Sabato', town: 'Francavilla Fontana' }
+  };
+  const dayNames = ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'];
+  function renderTodayStrip(){
+    const el = document.getElementById('todayStrip');
+    const today = new Date().getDay();
+    if (schedule[today]) {
+      el.innerHTML = 'ðŸ“ Oggi (' + schedule[today].day + ') siamo a <b>' + schedule[today].town + '</b>';
+    } else {
+      let next = null;
+      for (let i = 1; i <= 7; i++){
+        const idx = (today + i) % 7;
+        if (schedule[idx]) { next = schedule[idx]; break; }
+      }
+      el.innerHTML = next
+        ? 'Oggi il furgone Ã¨ fermo â€” torniamo ' + next.day + ' a <b>' + next.town + '</b>'
+        : 'Oggi il furgone Ã¨ fermo in laboratorio';
+    }
+  }
+  renderTodayStrip();
+
+  // ----- Carosello macelleria -----
+  const macSlides = [
+    { src:'macelleria-pollo-fresco.jpg', cap:'Pollo fresco intero e a pezzi' },
+    { src:'macelleria-banco-carne.jpg',  cap:'Tagli di pollo e carne fresca' },
+    { src:'macelleria-salsicce.jpg',     cap:'Carne e salsicce artigianali' },
+    { src:'macelleria-spiedini.jpg',     cap:'Involtini, spiedini e würstel' }
+  ];
+  const track = document.getElementById('macTrack');
+  const dots = document.querySelectorAll('.mac-dot');
+  let current = 0;
+  const visible = () => window.innerWidth <= 760 ? 1 : 3;
+  function updateCarousel(){
+    const slideW = track.querySelector('.mac-slide').offsetWidth + 14;
+    track.style.transform = 'translateX(-' + (current * slideW) + 'px)';
+    dots.forEach((d,i) => d.classList.toggle('active', i === current));
+  }
+  function moveCarousel(dir){
+    const max = macSlides.length - visible();
+    current = Math.max(0, Math.min(current + dir, max));
+    updateCarousel();
+  }
+  function goToSlide(i){ current = i; updateCarousel(); }
+  window.moveCarousel = moveCarousel;
+  window.goToSlide = goToSlide;
+
+  // ----- Lightbox -----
+  const overlay = document.getElementById('lbOverlay');
+  const lbImg = document.getElementById('lbImg');
+  const lbCap = document.getElementById('lbCaption');
+  let lbIndex = 0;
+  function openLightbox(i){
+    lbIndex = i;
+    lbImg.src = macSlides[i].src;
+    lbCap.textContent = macSlides[i].cap;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function lbMove(dir){
+    lbIndex = (lbIndex + dir + macSlides.length) % macSlides.length;
+    lbImg.src = macSlides[lbIndex].src;
+    lbCap.textContent = macSlides[lbIndex].cap;
+  }
+  window.openLightbox = openLightbox;
+  window.closeLightbox = closeLightbox;
+  window.lbMove = lbMove;
+  document.addEventListener('keydown', e => {
+    if(!overlay.classList.contains('open')) return;
+    if(e.key === 'ArrowRight') lbMove(1);
+    if(e.key === 'ArrowLeft') lbMove(-1);
+    if(e.key === 'Escape') closeLightbox();
+  });
+
+  // ----- Form prenotazione -> WhatsApp -----
+  // IMPORTANTE: inserire qui il numero WhatsApp reale con prefisso internazionale, es. 393331234567
+  const WHATSAPP_NUMBER = '390000000000';
+
+  const form = document.getElementById('reserveForm');
+  const status = document.getElementById('formStatus');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const nome = document.getElementById('nome').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const mercato = document.getElementById('mercato').value;
+    const data = document.getElementById('data').value;
+    const ordine = document.getElementById('ordine').value.trim();
+
+    let msg = 'Ciao! Vorrei prenotare un ordine.\n';
+    msg += 'Nome: ' + nome + '\n';
+    msg += 'Telefono: ' + telefono + '\n';
+    if (mercato) msg += 'Mercato: ' + mercato + '\n';
+    if (data) msg += 'Data: ' + data + '\n';
+    msg += 'Ordine: ' + ordine;
+
+    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
+    status.textContent = 'Apriamo WhatsApp per confermare la prenotazione...';
+  });
+</script>
+</body>
+</html>
+
+
